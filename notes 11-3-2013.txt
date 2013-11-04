@@ -1,0 +1,9 @@
+saturday 12pm/3pm:
+have a working game with WASD
+Two attacks right and left click
+made with construct 2
+
+Random dungeon library returns array of tiles
+
+Lineage stuff: You play as different characters as time progresses: teacher/apprentice, father/son
+fighting in a very similar dungeon that has *changed* a little
