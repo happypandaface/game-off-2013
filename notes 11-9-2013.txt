@@ -1,0 +1,13 @@
+concept artifact
+boots - dash
+shield - block
+helmet - berserk
+
+by wednesday:
+3 artifacts
+3 classes
+3 enemies
+
+my task (scott):
+generate rooms with enemies in them
+walls
