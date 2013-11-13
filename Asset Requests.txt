@@ -32,8 +32,12 @@ Enemies
 Boss
   I was thinking for gen I something line this: 
   static.tvtropes.org/pmwiki/pub/images/PandorasBox.jpeg
+Misc
+  Attack Graphics (slash wave, arrows, etc.)
 UI
-
+  Relic icons (delta symbol, change over time)
+  Weapon / Class attack/skill icons
+  (only if we have time: portraits with modular attributes)
 
 ----------
 Music
