@@ -32,7 +32,7 @@ public class PlayerCore : MonoBehaviour
 	//hair color / style
 	//eye color / style
 	//skin tone
-	
+
 	float berserk_t = 0.0f;
 	bool berserk_on = false;
 	float berserk_sta_cost;
@@ -52,7 +52,7 @@ public class PlayerCore : MonoBehaviour
 	//cast time
 
 	bool boots_on = false;
-	float boots_sta_cost = 10.0f;
+	float boots_sta_cost = 25.0f;
 	float boots_t = 0.0f;
 	float boots_duration = 0.5f;
 	float boots_invincible_duration = 7.5f / 60.0f; //7.5 frames of invulnerability
@@ -275,6 +275,7 @@ public class PlayerCore : MonoBehaviour
 		#region attacks
 		if ( Input.GetMouseButtonUp( 0 ) )
 		{
+			hp -= 2.0f;
 			//attacks
 			if ( character_class == CharacterClass.MELEE )
 			{

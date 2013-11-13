@@ -11,12 +11,14 @@ public class CustomController : MonoBehaviour
 	public bool move_enabled = true; //for disabling motion
 
 	public float speed = 2.0f; //unity units per second (we're using Tile Size pixels per unit (64) )
+
+	BoxCollider2D my_collider;
 	#endregion
 
 	// Use this for initialization
 	void Start () 
 	{
-	
+		my_collider = this.gameObject.GetComponent<BoxCollider2D>();
 	}
 	
 	// Update is called once per frame
@@ -27,19 +29,19 @@ public class CustomController : MonoBehaviour
 		#region input parsing
 		if ( move_enabled )
 		{
-			if ( Input.GetKey( KeyCode.A ) )
+			if ( Input.GetKey( KeyCode.A ) || Input.GetKey( KeyCode.LeftArrow ) )
 			{
 				move_vec.x -= 1;
 			}
-			if ( Input.GetKey ( KeyCode.D ) )
+			if ( Input.GetKey ( KeyCode.D ) || Input.GetKey ( KeyCode.RightArrow ) )
 			{
 				move_vec.x += 1;
 			}
-			if ( Input.GetKey ( KeyCode.S ) )
+			if ( Input.GetKey ( KeyCode.S ) || Input.GetKey ( KeyCode.DownArrow ) )
 			{
 				move_vec.y -= 1;
 			}
-			if ( Input.GetKey ( KeyCode.W ) )
+			if ( Input.GetKey ( KeyCode.W ) || Input.GetKey ( KeyCode.UpArrow ) )
 			{
 				move_vec.y += 1;
 			}
@@ -90,25 +92,86 @@ public class CustomController : MonoBehaviour
 			//Move.
 			//Get direction from vec.
 
-			//abstraction inefficiency
-			float x = this.gameObject.transform.position.x;
-			float y = this.gameObject.transform.position.y;
-			float z = this.gameObject.transform.position.z;
-
 			//Scale to speed
 			move_vec = move_vec * speed * Time.deltaTime;
 
-			//Actually move
-			this.gameObject.transform.position = new Vector3( x + move_vec.x, y + move_vec.y, z );
+			#region Collision Detection
+			//Get the distance from center to edge of box collider
+			float x_diff = my_collider.size.x / 2.0f + 0.01f;
+			float y_diff = my_collider.size.y / 2.0f + 0.01f;
+
+			//proper sign (+/-)
+			if ( move_vec.x < 0 )
+			{
+				x_diff = x_diff * -1.0f;
+			}
+			if ( move_vec.y < 0 )
+			{
+				y_diff = y_diff * -1.0f;
+			}
+
+			//Collision Detection
+			//TODO: isolate by axis
+			bool blockedx = BlockF ( new Vector3( x_diff + move_vec.x, 0.0f, 0.0f ) ) || 
+				            BlockF ( new Vector3( x_diff + move_vec.x, y_diff, 0.0f ) ) ||
+					        BlockF ( new Vector3( x_diff + move_vec.x, y_diff * -1.0f, 0.0f) );
+
+			bool blockedy = BlockF ( new Vector3( 0.0f, y_diff + move_vec.y, 0.0f ) ) ||
+							BlockF ( new Vector3( x_diff, y_diff + move_vec.y, 0.0f ) ) ||
+							BlockF ( new Vector3( x_diff * -1.0f, y_diff + move_vec.y, 0.0f ) );
+			#endregion
+
+			if ( ! blockedx )
+			{
+				//abstraction inefficiency
+				float x = this.gameObject.transform.position.x;
+				float y = this.gameObject.transform.position.y;
+				float z = this.gameObject.transform.position.z;
+
+				//Actually move
+				this.gameObject.transform.position = new Vector3( x + move_vec.x, y, z );
+			}
+			if ( ! blockedy)
+			{
+				//abstraction inefficiency
+				float x = this.gameObject.transform.position.x;
+				float y = this.gameObject.transform.position.y;
+				float z = this.gameObject.transform.position.z;
+				
+				//Actually move
+				this.gameObject.transform.position = new Vector3( x, y + move_vec.y, z );
+			}
 
 			//Force Camera to lock onto player
-			Camera.main.transform.position = new Vector3( this.gameObject.transform.position.x,
-			                                              this.gameObject.transform.position.y,
-			                                              Camera.main.transform.position.z );
+			Camera.main.transform.position = new Vector3( 
+				this.gameObject.transform.position.x,
+			    this.gameObject.transform.position.y,
+			    Camera.main.transform.position.z 
+			);
 		}
 		else
 		{
 			//Idle
 		}
+	}
+
+	bool BlockF( Vector3 vec )
+	{
+		//Utility Wall Block Check Function
+		//For collision detection. (triple raycast)
+		/*
+		Debug.DrawLine( 
+			this.gameObject.transform.position, 
+		    this.gameObject.transform.position + vec,
+		    new Color( 1.0f, 0.0f, 0.0f, 1.0f ),
+		    0.033f
+		);
+		*/
+
+		return  Physics2D.Linecast( 
+					this.gameObject.transform.position, 
+					this.gameObject.transform.position + vec, 
+					1 << LayerMask.NameToLayer( "Wall" ) 
+		); 
 	}
 }

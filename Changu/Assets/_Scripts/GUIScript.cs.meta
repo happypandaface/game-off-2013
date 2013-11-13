@@ -2,7 +2,13 @@ fileFormatVersion: 2
 guid: 6b766a155d93c3f46ba80d9a782426ed
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - hp_text_obj: {instanceID: 0}
+  - hp_bar_obj: {instanceID: 0}
+  - tex_near_death: {fileID: 2800000, guid: ce609945a7908fa41b102c8b88bfe34a, type: 3}
+  - sta_text_obj: {instanceID: 0}
+  - sta_bar_obj: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

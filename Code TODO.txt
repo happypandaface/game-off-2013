@@ -1,32 +1,33 @@
 !!!POLISH!!!
 
-Splash / Title screen prettiness
-Hero Gen I options polish
+[ ] Splash / Title screen prettiness
+[ ] Hero Gen I options polish
 
-Integrate animations
+[ ] Integrate animations
 
-Put the level generator / base level in.
-Put the level generation altering code in.
-Add wall / object / attack collision + handlers.
+[ ] Put the level generator / base level in.
+[ ] Put the level generation altering code in.
+[ ] Add object / attack collision + handlers.
+[X] Wall collision detection (smooth)
 
-Add Generational Transitions. (funeral / child / student / encore stills + text + scene transfers)
-Generational transition "shuffling"
-Get the Scene -> dungeon -> scene -> boss -> loop working smoothly.
+[ ] Add Generational Transitions. (funeral / child / student / encore stills + text + scene transfers)
+[ ] Generational transition "shuffling"
+[ ] Get the Scene -> dungeon -> scene -> boss -> loop working smoothly.
 
 !!!POLISH!!!
 
-Attack system (for mobs + player)
+[ ] Attack system (for mobs + player)
 
-Health pots / treasure.
+[ ] Health pots / treasure.
 
 Player
-  Ability progression
+  [ ] Ability progression
 
 Enemies
-  Behaviour + AI
+  [ ] Behaviour + AI
 
 Boss
-  Behaviour + AI
-  Changes over generations
+  [ ] Behaviour + AI
+  [ ] Changes over generations
 
 !!!POLISH!!!
