@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+#region enums
+public enum CharacterClass {MELEE, RANGED, MID};
+
+public enum Relic {SHIELD, BOOTS, BERSERK};
+
+public enum Gender {MALE, FEMALE};
+#endregion
+
 public class PlayerCore : MonoBehaviour 
 {
 	#region vars
@@ -17,8 +25,13 @@ public class PlayerCore : MonoBehaviour
 
 	int generation = 0;
 
-	string character_class; //ENUM: melee, ranged, ...
-	string relic = "boots"; //ENUM: shield, boots, berserk
+	public CharacterClass character_class; //ENUM: melee, ranged, ...
+	public Relic relic = Relic.BOOTS; //ENUM: shield, boots, berserk
+	public Gender gender = Gender.MALE; //ENUM: 0: female, 1: male
+
+	//hair color / style
+	//eye color / style
+	//skin tone
 	
 	float berserk_t = 0.0f;
 	bool berserk_on = false;
@@ -71,8 +84,17 @@ public class PlayerCore : MonoBehaviour
 		HandleInput ();
 
 		//regens
-		sta = Mathf.Min( sta + sta_regen_rate * Time.deltaTime, max_sta );
-		shield_dmg = Mathf.Max( shield_dmg + shield_regen_rate * Time.deltaTime, 0.0f );
+		if ( boots_on == false && shield_on == false )
+		{
+			sta = Mathf.Min( sta + sta_regen_rate * Time.deltaTime, max_sta );
+		}
+
+		if ( shield_on == false )
+		{
+			shield_dmg = Mathf.Max( shield_dmg + shield_regen_rate * Time.deltaTime, 0.0f );
+		}
+
+
 		if ( berserk_cooldown_t > 0.0f )
 		{
 			berserk_cooldown_t -= Time.deltaTime;
@@ -144,7 +166,7 @@ public class PlayerCore : MonoBehaviour
 		{
 			//DO Abilities
 			#region Shield
-			if ( relic == "shield" )
+			if ( relic == Relic.SHIELD )
 			{
 				if ( shield_on == false )
 				{
@@ -169,7 +191,7 @@ public class PlayerCore : MonoBehaviour
 			#endregion
 
 			#region Boots
-			else if ( relic == "boots" )
+			else if ( relic == Relic.BOOTS )
 			{
 				if ( boots_on == false )
 				{
@@ -200,7 +222,7 @@ public class PlayerCore : MonoBehaviour
 			#endregion
 
 			#region Zerk
-			else if ( relic == "berserk" )
+			else if ( relic == Relic.BERSERK )
 			{
 				if ( berserk_on == false )
 				{
@@ -254,11 +276,11 @@ public class PlayerCore : MonoBehaviour
 		if ( Input.GetMouseButtonUp( 0 ) )
 		{
 			//attacks
-			if ( character_class == "melee" )
+			if ( character_class == CharacterClass.MELEE )
 			{
 				//
 			}
-			if ( character_class == "ranged" )
+			if ( character_class == CharacterClass.RANGED )
 			{
 				//
 			}

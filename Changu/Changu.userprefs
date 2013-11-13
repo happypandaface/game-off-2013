@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_Scripts\PlayerCore.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_Scripts\CharacterInitializationGUI.cs">
     <Files>
-      <File FileName="Assets\_Scripts\PlayerCore.cs" Line="79" Column="4" />
-      <File FileName="Assets\_Scripts\CustomController.cs" Line="97" Column="4" />
-      <File FileName="Assets\_Scripts\GUIScript.cs" Line="50" Column="50" />
+      <File FileName="Assets\_Scripts\PlayerCore.cs" Line="9" Column="35" />
+      <File FileName="Assets\_Scripts\CustomController.cs" Line="1" Column="1" />
+      <File FileName="Assets\_Scripts\GUIScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\_Scripts\CharacterInitializationGUI.cs" Line="29" Column="49" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
