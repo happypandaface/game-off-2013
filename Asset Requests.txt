@@ -39,6 +39,14 @@ UI
   Weapon / Class attack/skill icons
   (only if we have time: portraits with modular attributes)
 
+  First Gen Hero Options:
+    Male Button
+    Female Button
+
+    Melee (Warrior) Class Icon
+    Ranged (Archer) Class Icon
+    ??? Class Icon
+
 ----------
 Music
 ----------
@@ -49,7 +57,7 @@ Boss Battle Theme
 Short:
   Victory Jingle
   Defeat Jingle
-  Encore Jingle
+  Encore Jingle -> this could be a full-blown thing if we want/have time.
 
 Generational Gap:
   Funeral Theme
