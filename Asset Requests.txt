@@ -1,0 +1,66 @@
+----------
+Graphics
+----------
+Tiles / objects
+  Medieval Themed
+  Steampunk Themed
+  Future Themed
+
+  Pillar
+  Crumbling Pillar
+  Vines
+  Walls
+  Cracked Walls
+
+  Treasure Chest Closed
+  Treasure Chest Opened
+  Pots
+  Health Pickup
+Character sprites
+  Idle
+  Walking
+  Bow Attack
+  Sword Attack
+  Boots Dodge
+  Shield Take Out
+  Shield Block
+  Shield Put Away
+  Berserk Mode Activation?
+
+  *Modular hair, eyes, and clothing
+Enemies
+Boss
+  I was thinking for gen I something line this: 
+  static.tvtropes.org/pmwiki/pub/images/PandorasBox.jpeg
+UI
+
+
+----------
+Music
+----------
+Intro / Title Theme?
+Dungeon Theme
+Boss Battle Theme
+
+Short:
+  Victory Jingle
+  Defeat Jingle
+  Encore Jingle
+
+Generational Gap:
+  Funeral Theme
+  Other Theme (Character didn't die)
+
+----------
+Sounds
+----------
+Footsteps?
+Breath (out of stamina)
+Shield Block
+Shield Take Out / Put Away Sound
+Shield Break Sound
+Dodge Sound
+Berserk On / Off Sound
+
+Sword Slash
+Bow Fire
