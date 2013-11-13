@@ -14,6 +14,9 @@ public class GUIScript : MonoBehaviour
 	public GameObject  hp_bar_obj;   //Object holds transform info
 	private GUITexture hp_bar;       //Actual GUI Graphic
 
+	public GameObject hp_bar_cap_r_obj;
+	private GUITexture hp_bar_cap_r;
+
 	public Texture2D tex_near_death; //"PANIC" screen overlay
 	private float red_flash_period = 0.0f;
 	private float red_flash_speed = 1.0f; //speed scaling for super panic effect.
@@ -23,6 +26,9 @@ public class GUIScript : MonoBehaviour
 
 	public GameObject  sta_bar_obj;  //Object holds transform info
 	private GUITexture sta_bar;      //Actual GUI Graphic
+
+	public GameObject sta_bar_cap_r_obj;
+	private GUITexture sta_bar_cap_r;
 	#endregion
 
 
@@ -33,9 +39,11 @@ public class GUIScript : MonoBehaviour
 
 		hp_text = hp_text_obj.GetComponent<GUIText>();
 		hp_bar  = hp_bar_obj.GetComponent<GUITexture>();
+		hp_bar_cap_r = hp_bar_cap_r_obj.GetComponent<GUITexture>();
 
 		sta_text = sta_text_obj.GetComponent<GUIText>();
 		sta_bar  = sta_bar_obj.GetComponent<GUITexture>();
+		sta_bar_cap_r = sta_bar_cap_r_obj.GetComponent<GUITexture>();
 	}
 
 	// Use this for initialization
@@ -47,13 +55,24 @@ public class GUIScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		hp_bar.pixelInset = new Rect( 0.0f, 0.0f, Mathf.Max(1, player_core.hp / player_core.max_hp * 100.0f), 10.0f );
-		sta_bar.pixelInset = new Rect( 0.0f, 10.0f, Mathf.Max(1, player_core.sta / player_core.max_sta * 100.0f), 10.0f );
+		hp_bar.pixelInset = new Rect( 0.0f, 0.0f, Mathf.Max(1, player_core.hp / player_core.max_hp * 100.0f), 16.0f );
+		sta_bar.pixelInset = new Rect( 0.0f, 0.0f, Mathf.Max(1, player_core.sta / player_core.max_sta * 100.0f), 16.0f );
 
-		hp_text.pixelOffset = new Vector2( 0.0f, 0.0f + 10.0f );
+		hp_bar_cap_r.pixelInset = new Rect( hp_bar.pixelInset.x + hp_bar.pixelInset.width, 
+		                                    hp_bar_cap_r.pixelInset.y, 
+		                                    hp_bar_cap_r.pixelInset.width, 
+		                                    hp_bar_cap_r.pixelInset.height 
+		                                   );
+		sta_bar_cap_r.pixelInset = new Rect( sta_bar.pixelInset.x + sta_bar.pixelInset.width,
+		                                       sta_bar_cap_r.pixelInset.y,
+		                                       sta_bar_cap_r.pixelInset.width,
+		                                       sta_bar_cap_r.pixelInset.height 
+		                                      );
+
+		hp_text.pixelOffset = new Vector2( 0.0f, 17.0f );
 		hp_text.text = "HP: " + (int)player_core.hp + "/" + (int)player_core.max_hp;
 
-		sta_text.pixelOffset = new Vector2( 0.0f, 10.0f + 10.0f);
+		sta_text.pixelOffset = new Vector2( 0.0f, 17.0f);
 		sta_text.text = "STA: " + (int)player_core.sta + "/" + (int)player_core.max_sta;
 
 		//Low HP Alarm!
