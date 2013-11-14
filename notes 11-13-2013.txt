@@ -1,0 +1,8 @@
+11-13-2013
+
+playable bit by saturday
+
+dungeon generator:
+linear-like long map
+bottle necks
+boss room at end (preset room)
