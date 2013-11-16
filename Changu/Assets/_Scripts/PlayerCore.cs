@@ -84,6 +84,7 @@ public class PlayerCore : MonoBehaviour
 	void Update () 
 	{
 		HandleInput ();
+		DeathCheck ();
 
 		//regens
 		if ( boots_on == false && shield_on == false )
@@ -352,6 +353,16 @@ public class PlayerCore : MonoBehaviour
 			hp -= dmg;
 			//animate
 			//check death?
+		}
+	}
+
+	void DeathCheck()
+	{
+		if ( hp <= 0.0f )
+		{
+			//YOU DIE
+			//if gen < end, play sad music, go next gen
+			//else, "next gen" = bad ending.
 		}
 	}
 }

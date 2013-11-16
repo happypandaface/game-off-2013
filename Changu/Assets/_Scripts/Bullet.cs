@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
 				collision.collider.gameObject.GetComponent<PlayerCore>().hp -= 10.0f; //TODO: call the right thing.
 				Destroy ( this.gameObject );
 			}
-			else if ( collision.collider.tag != "Enemy" ) //can't hit self
+			else if ( collision.collider.tag != "Enemy" && collision.collider.tag != "Bullet" ) //can't hit self, allies, or bullets
 			{
 				Destroy ( this.gameObject );
 			}
@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
 				//collider.gameObject.GetComponent<PlayerCore>().hp -= 10.0f; //TODO: call the right thing.
 				Destroy ( this.gameObject );
 			}
-			else if ( collision.collider.tag != "Player" ) //can't hit self
+			else if ( collision.collider.tag != "Player" && collision.collider.tag != "Bullet" ) //can't hit self or bullets
 			{
 				Destroy ( this.gameObject );
 			}
