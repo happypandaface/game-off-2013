@@ -1,6 +1,6 @@
 11-13-2013
 
-playable bit by saturday
+playable bit by saturday 12pm
 
 dungeon generator:
 linear-like long map

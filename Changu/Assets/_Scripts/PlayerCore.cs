@@ -14,6 +14,8 @@ public class PlayerCore : MonoBehaviour
 	#region vars
 	CustomController move_controller;
 
+	public GameObject arrow_prefab;
+
 	//HP
 	public float hp = 100.0f;
 	public float max_hp = 100.0f;
@@ -275,7 +277,12 @@ public class PlayerCore : MonoBehaviour
 		#region attacks
 		if ( Input.GetMouseButtonUp( 0 ) )
 		{
-			hp -= 2.0f;
+			Instantiate ( arrow_prefab, 
+			             new Vector3( 
+			            this.gameObject.transform.position.x - 5.0f,
+			            this.gameObject.transform.position.y,
+			            3.0f), 
+			             Quaternion.identity );
 			//attacks
 			if ( character_class == CharacterClass.MELEE )
 			{
@@ -303,7 +310,7 @@ public class PlayerCore : MonoBehaviour
 		return new Vector2( Mathf.Cos ( angle ), Mathf.Sin ( angle ) );
 	}
 
-	void OnHit( float dmg )
+	public void OnHit( float dmg )
 	{
 		//Player was hit by something
 
