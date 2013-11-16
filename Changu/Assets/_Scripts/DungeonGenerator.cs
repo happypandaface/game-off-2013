@@ -94,7 +94,6 @@ public class Corridor
 			{
 				for (int y = room1.yPos+room1.height; y < room2.yPos; y++)
 				{
-<<<<<<< HEAD:DunGen/Assets/DungeonGenerator.cs
 					Tile ts = new Tile();
 					ts.type = "floor";
 					ts.xPos = xAdd;
@@ -104,11 +103,6 @@ public class Corridor
 			}else
 			{
 				for (int y = room2.yPos+room2.height; y < room1.yPos; y++)
-=======
-					
-				}else
-					if (room1.xPos+room1.width <= room2.xPos+room2.width && room1.xPos+room1.width >= room2.xPos)
->>>>>>> a6eefada7c47040bc379f843b193c2e686e0ac3b:Changu/Assets/_Scripts/DungeonGenerator.cs
 				{
 					Tile ts = new Tile();
 					ts.type = "floor";
@@ -148,17 +142,12 @@ public class Corridor
 		{
 			//do hooked corridor
 		}
-<<<<<<< HEAD:DunGen/Assets/DungeonGenerator.cs
 	}
 	
 	public bool check(ArrayList dungeon)
 	{
 		int totalWallsIntersecting = 0;
 		for (int i = 0; i < tiles.Count; ++i)
-=======
-		else
-			if (room1.yPos <= room2.yPos+room2.height)
->>>>>>> a6eefada7c47040bc379f843b193c2e686e0ac3b:Changu/Assets/_Scripts/DungeonGenerator.cs
 		{
 			for (int c = 0; c < dungeon.Count; ++c)
 			{
@@ -174,16 +163,6 @@ public class Corridor
 						if (totalWallsIntersecting > 2)// don't want to intercect more than two walls (beginning and end)
 							return false;
 					}
-<<<<<<< HEAD:DunGen/Assets/DungeonGenerator.cs
-=======
-				}else
-					if (room1.yPos+room1.height <= room2.yPos+room2.width && room1.yPos+room1.height >= room2.yPos)
-				{
-					
-				}else
-				{
-					//do center corridor
->>>>>>> a6eefada7c47040bc379f843b193c2e686e0ac3b:Changu/Assets/_Scripts/DungeonGenerator.cs
 				}
 			}
 		}
@@ -217,12 +196,12 @@ public class DungeonGenerator
 	
 	void Start ()
 	{
-		
+	
 	}
 	
 	void Update ()
 	{
-		
+	
 	}
 	
 	public void config(float s, int w, int h, int rs)
