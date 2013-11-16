@@ -1,0 +1,9 @@
+notes: 11-16
+
+next meeting, first playable?
+
+fix git stuff, first playable may be working, idk.
+
+TODO plot out rest of month.
+
+TODO leave lots of time for play testing (bug fixes difficulty)
