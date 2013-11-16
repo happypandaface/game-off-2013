@@ -95,52 +95,7 @@ public class CustomController : MonoBehaviour
 			//Scale to speed
 			move_vec = move_vec * speed * Time.deltaTime;
 
-			#region Collision Detection
-			//Get the distance from center to edge of box collider
-			float x_diff = my_collider.size.x / 2.0f + 0.01f;
-			float y_diff = my_collider.size.y / 2.0f + 0.01f;
-
-			//proper sign (+/-)
-			if ( move_vec.x < 0 )
-			{
-				x_diff = x_diff * -1.0f;
-			}
-			if ( move_vec.y < 0 )
-			{
-				y_diff = y_diff * -1.0f;
-			}
-
-			//Collision Detection
-			//TODO: isolate by axis
-			bool blockedx = BlockF ( new Vector3( x_diff + move_vec.x, 0.0f, 0.0f ) ) || 
-				            BlockF ( new Vector3( x_diff + move_vec.x, y_diff, 0.0f ) ) ||
-					        BlockF ( new Vector3( x_diff + move_vec.x, y_diff * -1.0f, 0.0f) );
-
-			bool blockedy = BlockF ( new Vector3( 0.0f, y_diff + move_vec.y, 0.0f ) ) ||
-							BlockF ( new Vector3( x_diff, y_diff + move_vec.y, 0.0f ) ) ||
-							BlockF ( new Vector3( x_diff * -1.0f, y_diff + move_vec.y, 0.0f ) );
-			#endregion
-
-			if ( ! blockedx )
-			{
-				//abstraction inefficiency
-				float x = this.gameObject.transform.position.x;
-				float y = this.gameObject.transform.position.y;
-				float z = this.gameObject.transform.position.z;
-
-				//Actually move
-				this.gameObject.transform.position = new Vector3( x + move_vec.x, y, z );
-			}
-			if ( ! blockedy)
-			{
-				//abstraction inefficiency
-				float x = this.gameObject.transform.position.x;
-				float y = this.gameObject.transform.position.y;
-				float z = this.gameObject.transform.position.z;
-				
-				//Actually move
-				this.gameObject.transform.position = new Vector3( x, y + move_vec.y, z );
-			}
+			Move ( move_vec );
 
 			//Force Camera to lock onto player
 			Camera.main.transform.position = new Vector3( 
@@ -152,6 +107,59 @@ public class CustomController : MonoBehaviour
 		else
 		{
 			//Idle
+		}
+	}
+
+	public void Move( Vector3 move_vec )
+	{
+		//Moves the player by move_vec (pos = pos + vec),
+		//but also respects collisions.
+
+		#region Collision Detection
+		//Get the distance from center to edge of box collider
+		float x_diff = my_collider.size.x / 2.0f + 0.01f;
+		float y_diff = my_collider.size.y / 2.0f + 0.01f;
+		
+		//proper sign (+/-)
+		if ( move_vec.x < 0 )
+		{
+			x_diff = x_diff * -1.0f;
+		}
+		if ( move_vec.y < 0 )
+		{
+			y_diff = y_diff * -1.0f;
+		}
+		
+		//Collision Detection
+		//TODO: isolate by axis
+		bool blockedx = BlockF ( new Vector3( x_diff + move_vec.x, 0.0f, 0.0f ) ) || 
+			BlockF ( new Vector3( x_diff + move_vec.x, y_diff, 0.0f ) ) ||
+				BlockF ( new Vector3( x_diff + move_vec.x, y_diff * -1.0f, 0.0f) );
+		
+		bool blockedy = BlockF ( new Vector3( 0.0f, y_diff + move_vec.y, 0.0f ) ) ||
+			BlockF ( new Vector3( x_diff, y_diff + move_vec.y, 0.0f ) ) ||
+				BlockF ( new Vector3( x_diff * -1.0f, y_diff + move_vec.y, 0.0f ) );
+		#endregion
+		
+		if ( ! blockedx )
+		{
+			//abstraction inefficiency
+			float x = this.gameObject.transform.position.x;
+			float y = this.gameObject.transform.position.y;
+			float z = this.gameObject.transform.position.z;
+			
+			//Actually move
+			this.gameObject.transform.position = new Vector3( x + move_vec.x, y, z );
+		}
+		if ( ! blockedy)
+		{
+			//abstraction inefficiency
+			float x = this.gameObject.transform.position.x;
+			float y = this.gameObject.transform.position.y;
+			float z = this.gameObject.transform.position.z;
+			
+			//Actually move
+			this.gameObject.transform.position = new Vector3( x, y + move_vec.y, z );
 		}
 	}
 

@@ -4,7 +4,7 @@
     <Files>
       <File FileName="Assets\_Scripts\Bullet.cs" Line="1" Column="1" />
       <File FileName="Assets\_Scripts\PlayerCore.cs" Line="1" Column="1" />
-      <File FileName="Assets\_Scripts\ExampleDungeonUser.cs" Line="32" Column="4" />
+      <File FileName="Assets\_Scripts\ExampleDungeonUser.cs" Line="11" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

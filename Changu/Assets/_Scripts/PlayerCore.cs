@@ -144,6 +144,7 @@ public class PlayerCore : MonoBehaviour
 			}
 			else
 			{
+				/*
 				//MOVE!
 				float x = this.gameObject.transform.position.x;
 				float y = this.gameObject.transform.position.y;
@@ -152,6 +153,11 @@ public class PlayerCore : MonoBehaviour
 				float y_plus = boots_dir.y * boots_speed * Time.deltaTime;
 
 				this.gameObject.transform.position = new Vector3(x + x_plus, y + y_plus, z);
+				*/
+
+				move_controller.Move ( new Vector3( boots_dir.x * boots_speed * Time.deltaTime, 
+				                                    boots_dir.y * boots_speed * Time.deltaTime,
+				                                    0.0f ) );
 
 				//Force Camera to lock onto player
 				Camera.main.transform.position = new Vector3( this.gameObject.transform.position.x,
