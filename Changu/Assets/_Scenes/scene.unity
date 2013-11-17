@@ -142,7 +142,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 497621972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0700000003, y: -.439999998, z: 0}
+  m_LocalPosition: {x: .0700000003, y: .0599999987, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1100434046}
@@ -400,7 +400,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999836881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00999999978, y: -.485000014, z: 0}
+  m_LocalPosition: {x: .00999999978, y: .0149999997, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 1169635643}
@@ -511,7 +511,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1169635641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 497621973}
@@ -815,7 +815,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1514530144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0700000003, y: -.469999999, z: 0}
+  m_LocalPosition: {x: .0700000003, y: .0299999993, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1210739292}
@@ -824,6 +824,32 @@ Transform:
   - {fileID: 700765915}
   - {fileID: 1236118599}
   m_Father: {fileID: 1169635643}
+--- !u!1 &1601008594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1601008595}
+  m_Layer: 0
+  m_Name: Dungeon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1601008595
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1601008594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1694895830
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,10 +954,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd9a2dbad3bc94a47a82725fcb8ea475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 400000, guid: 26fd6dc505c263a44af0f9c7297e767e, type: 2}
-  floorPrefab: {fileID: 400000, guid: f58086ae4e63ccf4db57b15def890bce, type: 2}
-  enemyPrefab: {fileID: 400000, guid: 6086efdd0bb5d964298364a969b802aa, type: 2}
-  wallPrefab: {fileID: 400000, guid: ad49f9773f1f9274a98a2b4f15b4ba6d, type: 2}
+  dungeon: {fileID: 1601008594}
+  playerPrefab: {fileID: 100000, guid: 26fd6dc505c263a44af0f9c7297e767e, type: 2}
+  floorPrefab: {fileID: 100000, guid: f58086ae4e63ccf4db57b15def890bce, type: 2}
+  enemyPrefab: {fileID: 100000, guid: 6086efdd0bb5d964298364a969b802aa, type: 2}
+  wallPrefab: {fileID: 100000, guid: ad49f9773f1f9274a98a2b4f15b4ba6d, type: 2}
 --- !u!4 &1744328158
 Transform:
   m_ObjectHideFlags: 0
@@ -939,7 +966,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1744328156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

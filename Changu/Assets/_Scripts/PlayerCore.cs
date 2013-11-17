@@ -12,7 +12,12 @@ public enum Gender {MALE, FEMALE};
 public class PlayerCore : MonoBehaviour 
 {
 	#region vars
-	CustomController move_controller;
+	//Inter-generational data
+
+
+	//Other core player stuff
+	[HideInInspector]
+	public CustomController move_controller;
 
 	public GameObject arrow_prefab;
 
@@ -25,7 +30,8 @@ public class PlayerCore : MonoBehaviour
 	public float max_sta = 100.0f;
 	float sta_regen_rate = 10.0f; //stamina regen per sec.
 
-	int generation = 0;
+	[HideInInspector]
+	public int generation = 0;
 
 	public CharacterClass character_class; //ENUM: melee, ranged, ...
 	public Relic relic = Relic.BOOTS; //ENUM: shield, boots, berserk
@@ -362,7 +368,8 @@ public class PlayerCore : MonoBehaviour
 			//else, "next gen" = bad ending.
 			if ( generation <= 7 )
 			{
-				generation++;
+				//Generational stuff using that script
+
 				//death flag
 				//trigger death event.
 				//disable controls + ai?
@@ -375,7 +382,7 @@ public class PlayerCore : MonoBehaviour
 		}
 	}
 
-	void SetRelicStats()
+	public void SetRelicStats()
 	{
 		//sets the relic stats based on the generation (Upgrades them)
 

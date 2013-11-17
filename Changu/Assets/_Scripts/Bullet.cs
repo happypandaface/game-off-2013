@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
 	public Alliance alliance = Alliance.ENEMY; //"player" OR "enemy"
 
 	public float damage = 10.0f;
-	public float speed = 12.0f; //speed
+	public float speed = 12.0f; //speed (units / s)
 	public Vector3 direction = new Vector3( 0.0f, 0.0f, 0.0f ); //unit vector indicating direction
 
 	float t = 0.0f;
@@ -53,7 +53,7 @@ public class Bullet : MonoBehaviour
 			Collider2D player = Physics2D.OverlapCircle( center, r, 1 << LayerMask.NameToLayer( "Player" ) );
 			if ( player != null ) //hit player
 			{
-				player.gameObject.GetComponent<PlayerCore>().hp -= 10.0f; //TODO: call the right thing.
+				player.gameObject.GetComponent<PlayerCore>().OnHit( 10.0f );
 				Destroy ( this.gameObject );
 			}
 			else if ( Physics2D.OverlapCircle( center, r, 1 << LayerMask.NameToLayer( "Wall" ) ) != null ) //can't hit self, allies, or bullets
@@ -73,12 +73,10 @@ public class Bullet : MonoBehaviour
 					//c.gameObject.GetComponent<>().;
 				}
 				Destroy ( this.gameObject );
-				Debug.Log (  "hit an enemy" );
 			}
 			else if ( Physics2D.OverlapCircle( center, r, 1 << LayerMask.NameToLayer( "Wall" ) ) != null ) //can't hit self or bullets
 			{
 				Destroy ( this.gameObject );
-				Debug.Log( "hit a wall." );
 			}
 		}
 		#endregion

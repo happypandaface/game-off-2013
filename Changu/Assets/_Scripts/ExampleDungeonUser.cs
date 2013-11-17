@@ -3,13 +3,17 @@ using System.Collections;
 
 public class ExampleDungeonUser : MonoBehaviour 
 {
-	
-	public Transform playerPrefab;
-	public Transform floorPrefab;
-	public Transform enemyPrefab;
-	public Transform wallPrefab;
+	#region vars
+	public GameObject dungeon;
+
+	public GameObject playerPrefab;
+	public GameObject floorPrefab;
+	public GameObject enemyPrefab;
+	public GameObject wallPrefab;
+
 	private int tileSize = 1;
 	//private float speed = 100;
+	#endregion
 	
 	void Start () 
 	{
@@ -31,11 +35,13 @@ public class ExampleDungeonUser : MonoBehaviour
 			}
 			else if (ts.type == "floor")
 			{
-				Instantiate(floorPrefab, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				GameObject tile = (GameObject)Instantiate(floorPrefab, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				tile.transform.parent = dungeon.transform;
 			}
 			else if (ts.type == "wall")
 			{
-				Instantiate(wallPrefab, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				GameObject tile = (GameObject)Instantiate(wallPrefab, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				tile.transform.parent = dungeon.transform;
 			}
 		}
 	}

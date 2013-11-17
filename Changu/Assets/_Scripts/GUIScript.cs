@@ -72,7 +72,7 @@ public class GUIScript : MonoBehaviour
 		hp_text.pixelOffset = new Vector2( 0.0f, 17.0f );
 		hp_text.text = "HP: " + (int)player_core.hp + "/" + (int)player_core.max_hp;
 
-		sta_text.pixelOffset = new Vector2( 0.0f, 17.0f);
+		sta_text.pixelOffset = new Vector2( 0.0f, 17.0f );
 		sta_text.text = "STA: " + (int)player_core.sta + "/" + (int)player_core.max_sta;
 
 		//Low HP Alarm!
