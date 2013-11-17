@@ -145,16 +145,6 @@ public class PlayerCore : MonoBehaviour
 			}
 			else
 			{
-				/*
-				//MOVE!
-				float x = this.gameObject.transform.position.x;
-				float y = this.gameObject.transform.position.y;
-				float z = this.gameObject.transform.position.z;
-				float x_plus = boots_dir.x * boots_speed * Time.deltaTime;
-				float y_plus = boots_dir.y * boots_speed * Time.deltaTime;
-
-				this.gameObject.transform.position = new Vector3(x + x_plus, y + y_plus, z);
-				*/
 
 				move_controller.Move ( new Vector3( boots_dir.x * boots_speed * Time.deltaTime, 
 				                                    boots_dir.y * boots_speed * Time.deltaTime,
@@ -284,12 +274,19 @@ public class PlayerCore : MonoBehaviour
 		#region attacks
 		if ( Input.GetMouseButtonUp( 0 ) )
 		{
-			Instantiate ( arrow_prefab, 
-			             new Vector3( 
-			            this.gameObject.transform.position.x - 5.0f,
-			            this.gameObject.transform.position.y,
-			            3.0f), 
-			             Quaternion.identity );
+			GameObject arrow = (GameObject)Instantiate ( arrow_prefab, 
+				new Vector3( 
+			    this.gameObject.transform.position.x,
+			    this.gameObject.transform.position.y,
+			    3.0f), 
+			    Quaternion.identity );
+			arrow.GetComponent<Bullet>().alliance = Alliance.PLAYER;
+			arrow.GetComponent<Bullet>().damage = 10.0f;
+
+			float angle = Mathf.Atan2 ( Input.mousePosition.y - Screen.height / 2, Input.mousePosition.x - Screen.width / 2 );
+
+			arrow.GetComponent<Bullet>().direction = new Vector3( Mathf.Cos ( angle ), Mathf.Sin ( angle ) );
+
 			//attacks
 			if ( character_class == CharacterClass.MELEE )
 			{
@@ -363,6 +360,39 @@ public class PlayerCore : MonoBehaviour
 			//YOU DIE
 			//if gen < end, play sad music, go next gen
 			//else, "next gen" = bad ending.
+			if ( generation <= 7 )
+			{
+				generation++;
+				//death flag
+				//trigger death event.
+				//disable controls + ai?
+
+				//relic upgrades: change stats
+				//ability levels up...
+				//class + appearance changes
+				//roll matching scene.
+			}
 		}
+	}
+
+	void SetRelicStats()
+	{
+		//sets the relic stats based on the generation (Upgrades them)
+
+		int g = generation; //base 0
+		float max_g = 7.0f;   //maximum generations (remember: base 0)
+
+		boots_invincible_duration = (7.0f * (g / max_g) + 7.5f) / 60.0f; //increase i fram duration
+		boots_sta_cost = -10.0f * (g / max_g) + 20.0f; //reduce stamina cost
+
+		shield_max_dmg = 80.0f * (g / max_g) + 20.0f; //increase damage capacity
+		shield_regen_rate = -40.0f * (g / max_g) - 10.0f; //increase regen rate.
+		shield_sta_cost = -5.0f * (g / max_g) + 10.0f; //reduce stamina cost?
+
+		berserk_dur = 15.0f * (g / max_g) + 15.0f; //increase duration
+		berserk_dmg_multiplier = 1.0f * (g / max_g) + 2.0f; //increase damage bonus
+		berserk_def_multiplier = 0.25f * (g / max_g) + 0.5f; //increase defense bonus
+		berserk_sta_cost = 0.0f * (g / max_g) + 0.0f; //reduce stamina cost?
+		berserk_cooldown_total = -1.0f * (g / max_g) + 10.0f; //reduce CD?
 	}
 }

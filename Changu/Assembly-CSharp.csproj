@@ -52,6 +52,8 @@
      <Compile Include="Assets\_Scripts\DungeonGenerator.cs" />
      <Compile Include="Assets\_Scripts\ExampleDungeonUser.cs" />
      <Compile Include="Assets\_Scripts\GUIScript.cs" />
+     <Compile Include="Assets\_Scripts\HealthBlob.cs" />
+     <Compile Include="Assets\_Scripts\HealthPot.cs" />
      <Compile Include="Assets\_Scripts\PlayerAnimator.cs" />
      <Compile Include="Assets\_Scripts\PlayerCore.cs" />
   </ItemGroup>

@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum Alliance { ENEMY, PLAYER };
+
 //enemy bullet
 public class Bullet : MonoBehaviour 
 {
 	#region vars
-	string alliance = "enemy"; //"player" OR "enemy"
+	public Alliance alliance = Alliance.ENEMY; //"player" OR "enemy"
+
+	public float damage = 10.0f;
+	public float speed = 12.0f; //speed
+	public Vector3 direction = new Vector3( 0.0f, 0.0f, 0.0f ); //unit vector indicating direction
 
 	float t = 0.0f;
 	#endregion
@@ -26,36 +32,56 @@ public class Bullet : MonoBehaviour
 			Destroy ( this.gameObject );
 		}
 
-		this.gameObject.transform.position = new Vector3( this.gameObject.transform.position.x + 1.0f * Time.deltaTime,
-		                                                  this.gameObject.transform.position.y,
-		                                                  this.gameObject.transform.position.z );
-	}
+		this.gameObject.transform.position = 
+			new Vector3( 
+			    this.gameObject.transform.position.x + direction.x * speed * Time.deltaTime,
+		        this.gameObject.transform.position.y + direction.y * speed * Time.deltaTime,
+		        this.gameObject.transform.position.z 
+			);
 
-	void OnCollisionEnter2D ( Collision2D collision )
-	{
-		if ( alliance == "enemy" )
+		//Collision testing
+
+		//Abstraction inefficiency
+		float x = this.gameObject.transform.position.x;
+		float y = this.gameObject.transform.position.y;
+		Vector2 center = new Vector2( x, y );
+		float r = this.gameObject.GetComponent<CircleCollider2D>().radius;
+
+		#region enemy bullets
+		if ( alliance == Alliance.ENEMY )
 		{
-			if ( collision.collider.tag == "Player" ) //hit player
+			Collider2D player = Physics2D.OverlapCircle( center, r, 1 << LayerMask.NameToLayer( "Player" ) );
+			if ( player != null ) //hit player
 			{
-				collision.collider.gameObject.GetComponent<PlayerCore>().hp -= 10.0f; //TODO: call the right thing.
+				player.gameObject.GetComponent<PlayerCore>().hp -= 10.0f; //TODO: call the right thing.
 				Destroy ( this.gameObject );
 			}
-			else if ( collision.collider.tag != "Enemy" && collision.collider.tag != "Bullet" ) //can't hit self, allies, or bullets
+			else if ( Physics2D.OverlapCircle( center, r, 1 << LayerMask.NameToLayer( "Wall" ) ) != null ) //can't hit self, allies, or bullets
 			{
 				Destroy ( this.gameObject );
 			}
 		}
-		else if ( alliance == "player" )
+		#endregion
+		#region player bullets
+		else if ( alliance == Alliance.PLAYER )
 		{
-			if ( collision.collider.tag == "Enemy" ) //hit enemy (use common core stats)
+			Collider2D[] hits = Physics2D.OverlapCircleAll( center, r, 1 << LayerMask.NameToLayer( "Enemy" ) );
+			if ( hits.Length > 0 ) //hit enemy (use common core stats)
 			{
-				//collider.gameObject.GetComponent<PlayerCore>().hp -= 10.0f; //TODO: call the right thing.
+				foreach ( Collider2D c in hits )
+				{
+					//c.gameObject.GetComponent<>().;
+				}
 				Destroy ( this.gameObject );
+				Debug.Log (  "hit an enemy" );
 			}
-			else if ( collision.collider.tag != "Player" && collision.collider.tag != "Bullet" ) //can't hit self or bullets
+			else if ( Physics2D.OverlapCircle( center, r, 1 << LayerMask.NameToLayer( "Wall" ) ) != null ) //can't hit self or bullets
 			{
 				Destroy ( this.gameObject );
+				Debug.Log( "hit a wall." );
 			}
 		}
+		#endregion
+
 	}
 }
