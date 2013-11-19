@@ -16,7 +16,9 @@ Tiles / objects
   Treasure Chest Opened
   Pots
   Health Pickup
-Character sprites
+
+  Floor Tiles
+Character sprites (4 directional)
   Idle
   Walking
   Bow Attack
@@ -28,6 +30,18 @@ Character sprites
   Berserk Mode Activation?
 
   *Modular hair, eyes, and clothing
+  Hair
+    Old man white beard + balding hair
+    Old lady hair
+    2-3 male styles, 2-3 female styles. (in blonde, redhead, brown, and black coloration)
+  Eyes
+    Brown, Green, Blue
+  Clothes
+    Melee/warrior outfit
+    Archer/hunter outfit
+    Other class outfit
+  Body
+    3 skin tones: light, tan, dark. 
 Enemies
 Boss
   I was thinking for gen I something line this: 
@@ -36,6 +50,9 @@ Misc
   Attack Graphics (slash wave, arrows, etc.)
 UI
   Relic icons (delta symbol, change over time)
+    Shield
+    Boots
+    Berserk helmet (with angry eyes)
   Weapon / Class attack/skill icons
   (only if we have time: portraits with modular attributes)
 
