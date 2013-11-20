@@ -99,6 +99,11 @@ public class Corridor
 					ts.xPos = xAdd;
 					ts.yPos = y;
 					tiles.Add(ts);
+					if (y != room1.yPos+room1.height && y != room2.yPos-1)
+					{
+						doWall(ref tiles, xAdd-1, y);
+						doWall(ref tiles, xAdd+1, y);
+					}
 				}
 			}else
 			{
@@ -109,6 +114,11 @@ public class Corridor
 					ts.xPos = xAdd;
 					ts.yPos = y;
 					tiles.Add(ts);
+					if (y != room2.yPos+room2.height && y != room1.yPos-1)
+					{
+						doWall(ref tiles, xAdd-1, y);
+						doWall(ref tiles, xAdd+1, y);
+					}
 				}
 			}
 		}else
@@ -126,6 +136,11 @@ public class Corridor
 					ts.xPos = x;
 					ts.yPos = yAdd;
 					tiles.Add(ts);
+					if (x != room1.xPos+room1.width && x != room2.xPos-1)
+					{
+						doWall(ref tiles, x, yAdd-1);
+						doWall(ref tiles, x, yAdd+1);
+					}
 				}
 			}else
 			{
@@ -136,12 +151,26 @@ public class Corridor
 					ts.xPos = x;
 					ts.yPos = yAdd;
 					tiles.Add(ts);
+					if (x != room2.xPos+room2.width && x != room1.xPos-1)
+					{
+						doWall(ref tiles, x, yAdd-1);
+						doWall(ref tiles, x, yAdd+1);
+					}
 				}
 			}
 		}else
 		{
 			//do hooked corridor
 		}
+	}
+	
+	private void doWall(ref ArrayList tiles, int x, int y)
+	{
+		Tile ts = new Tile();
+		ts.type = "wall";
+		ts.xPos = x;
+		ts.yPos = y;
+		tiles.Add(ts);
 	}
 	
 	public bool check(ArrayList dungeon)
@@ -269,12 +298,15 @@ public class DungeonGenerator
 		ts.xPos = (int)spawnPos.x;
 		ts.yPos = (int)spawnPos.y;
 		dungeon.Add(ts);
-		Vector2 enPos = ((Room)roomsMade[1]).getRandomPos(seed);
-		Tile en = new Tile();
-		en.type = "enemy";
-		en.xPos = (int)enPos.x;
-		en.yPos = (int)enPos.y;
-		dungeon.Add(en);
+		for (int i = 1; i < roomsMade.Count; ++i)
+		{
+			Vector2 enPos = ((Room)roomsMade[i]).getRandomPos(seed);
+			Tile en = new Tile();
+			en.type = "enemy";
+			en.xPos = (int)enPos.x;
+			en.yPos = (int)enPos.y;
+			dungeon.Add(en);
+		}
 		return dungeon;
 	}
 }
