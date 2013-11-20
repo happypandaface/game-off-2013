@@ -64,6 +64,19 @@ UI
     Ranged (Archer) Class Icon
     ??? Class Icon
 
+CUTSCENES / fullscreen art ( 960 x 600 px max )
+  Title / splash screen
+  Full screen stills for
+    Hero returns triumphant
+    Hero dies
+    <if we have time>
+    Student
+    Child
+    Encore
+    After final boss fight
+  These can be simple black and white shillouette stills.
+  The bottom 64 pixels should be left black as space for text.
+  -> you can put a black border of arbitrary size (> 64) around it if it might look better
 ----------
 Music
 ----------
