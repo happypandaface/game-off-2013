@@ -69,6 +69,11 @@ public class Cutscene : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if ( Input.GetKeyDown ( KeyCode.Space ) || Input.GetKeyDown ( KeyCode.Return ) )
+		{
+			state = CutsceneState.END;
+		}
+
 		#region state management
 		t += Time.deltaTime;
 		if ( t >= t_goal ) //state transition
