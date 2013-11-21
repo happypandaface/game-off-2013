@@ -6,7 +6,8 @@ public class ExampleDungeonUser : MonoBehaviour
 	#region vars
 	public GameObject dungeon;
 
-	public GameObject playerPrefab;
+	//public GameObject playerPrefab;
+	public GameObject playerInstance; //changed to using 1 player instance.
 	public GameObject floorPrefab;
 	public GameObject enemyPrefab;
 	public GameObject wallPrefab;
@@ -26,8 +27,10 @@ public class ExampleDungeonUser : MonoBehaviour
 			Tile ts = (Tile)arr[i];
 			if (ts.type == "spawn")
 			{
-				Instantiate(playerPrefab, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				//Instantiate(playerPrefab, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
 				//transform.position = new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, -10); //I don't think this does what you think?
+				playerInstance.transform.position = new Vector3( ts.xPos * tileSize, ts.yPos * tileSize, 0.0f );
+				Camera.main.transform.position = new Vector3( ts.xPos * tileSize, ts.yPos * tileSize, -10.0f );
 			}
 			else if (ts.type == "enemy")
 			{

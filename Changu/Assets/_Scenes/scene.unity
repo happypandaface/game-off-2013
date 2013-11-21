@@ -250,7 +250,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dungeon: {fileID: 1601008594}
-  playerPrefab: {fileID: 100000, guid: 26fd6dc505c263a44af0f9c7297e767e, type: 2}
+  playerInstance: {fileID: 1410966868}
   floorPrefab: {fileID: 100000, guid: f58086ae4e63ccf4db57b15def890bce, type: 2}
   enemyPrefab: {fileID: 100000, guid: 6086efdd0bb5d964298364a969b802aa, type: 2}
   wallPrefab: {fileID: 100000, guid: d970d0e06e6734243a5fc8015916bbcb, type: 2}
