@@ -176,9 +176,10 @@ public class CustomController : MonoBehaviour
 		);
 		*/
 
+		Vector3 offset = new Vector3( my_collider.center.x, my_collider.center.y, 0.0f );
 		return  Physics2D.Linecast( 
-					this.gameObject.transform.position, 
-					this.gameObject.transform.position + vec, 
+					this.gameObject.transform.position + offset, 
+					this.gameObject.transform.position + offset + vec, 
 					1 << LayerMask.NameToLayer( "Wall" ) 
 		); 
 	}

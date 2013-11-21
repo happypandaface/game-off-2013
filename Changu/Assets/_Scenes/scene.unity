@@ -843,7 +843,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_SortingLayerID: 2511236001
-  m_Sprite: {fileID: 21300000, guid: 60709a28ab6e8da4a8a8d89147f051be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef547d47921383040b8de00dbe12e9b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1410966871
 Transform:
@@ -866,7 +866,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Size: {x: .949999988, y: .949999988}
-  m_Center: {x: 0, y: 0}
+  m_Center: {x: 0, y: -.25}
 --- !u!114 &1410966873
 MonoBehaviour:
   m_ObjectHideFlags: 0
