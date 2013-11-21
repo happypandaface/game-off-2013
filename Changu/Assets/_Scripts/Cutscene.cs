@@ -214,9 +214,28 @@ public class Cutscene : MonoBehaviour
 	{
 		//starts the opening cutscene
 		//set up data
-		scenes.Add ( new CutsceneData(3.0f, "Once upon a time...", 0) );
-		scenes.Add ( new CutsceneData(2.5f, "there were some heroes...", 0) );
-		scenes.Add ( new CutsceneData(2.5f, "these are their stories...", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "Once, a long time ago...", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "there was a great evil.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "Many heroes fought against it,", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "and many heroes fell.", 0) );
+		scenes.Add ( new CutsceneData(1.0f, "In the end,", 0) );
+		scenes.Add ( new CutsceneData(1.0f, "one prevailed.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "He sealed the evil away...", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "And hid it from the eyes of men.", 0) );
+		scenes.Add ( new CutsceneData(0.0f, "", 0) );
+
+		scenes.Add ( new CutsceneData(3.0f, "For his valor, the hero was given riches.", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "But when he died...", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "His children became greedy.", 0) );
+		scenes.Add ( new CutsceneData(1.5f, "They fought over it.", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "After much bloodshed,", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "They decided to hide the treasure,", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "so no one would fight over it.", 0) );
+		scenes.Add ( new CutsceneData(0.0f, "", 0) );
+
+		scenes.Add ( new CutsceneData(1.0f, "Many years passed.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "People forgot the hero, and the evil.", 0) );
+		scenes.Add ( new CutsceneData(3.0f, "But they still search for his treasure...", 0) );
 		//start it!
 		StartCutscene();
 	}
