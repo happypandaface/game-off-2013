@@ -1,21 +1,162 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Dungeon Generator returns an array of these:
 public struct Tile
 {
 	public string type;
+	public ArrayList subTypes;// this should only be accessed by classes inside this file (no keyword for this in C#)
+	// if you wanna check a sub type use DungeonGenerator.checkSubType(tile, "subType") TODO
 	public int xPos;
 	public int yPos;
 }
 
-public class Room
+public class DungeonGenerator
+{
+	public float seed;
+	public int width;
+	public int height;
+	public int rooms;
+	private int corridorWidth = 2;
+	
+	// set up the seed, width, height and # of rooms
+	public void config(float s, int w, int h, int rs)
+	{
+		seed = s;
+		width = w;
+		height = h;
+		rooms = rs;
+	}
+	
+	// set the width of corridors
+	public void setCorridorWidth(int w)
+	{
+		corridorWidth = w;
+	}
+	
+	// use this to check tiles for certain sub types
+	public bool checkSubType(Tile tile, string sType)
+	{
+		for (int i = 0; i < tile.subTypes.Count; ++i)
+		{
+			if (((string)tile.subTypes[i]) == sType)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	// returns a dungeon with the previously given config
+	public ArrayList generateDungeon()
+	{
+		Random.seed = (int)(seed*100000.0f);
+		while (true)
+		{
+			ArrayList dungeon = new ArrayList();
+			ArrayList roomsMade = new ArrayList();
+			while (roomsMade.Count < rooms)
+			{
+				Room r = new Room();
+				r.make ((int)Mathf.Floor(Random.value*width), (int)Mathf.Floor(Random.value*height), (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+3, (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+3);
+				if (r.check(dungeon))
+				{
+					roomsMade.Add(r);
+					r.addTo (ref dungeon);
+				}
+			}
+			ArrayList corridorsMade = new ArrayList();
+			for (int i = 0; i < roomsMade.Count; ++i)
+			{
+				for (int c = 0; c < roomsMade.Count; ++c)
+				{
+					if (i != c)
+					{
+						Corridor cor = new Corridor();
+						cor.setWidth(corridorWidth);
+						cor.make (((Room)roomsMade[i]), ((Room)roomsMade[c]));
+						if (cor.check(dungeon))
+						{
+							corridorsMade.Add(cor);
+							cor.addTo (ref dungeon);
+						}
+					}
+				}
+			}
+			for (int i = 0; i < roomsMade.Count; ++i)
+			{
+				((Room)roomsMade[i]).touched = false;
+			}
+			if (!checkIfDungeonWorks(0, roomsMade, corridorsMade))
+				continue;
+			Vector2 spawnPos = ((Room)roomsMade[0]).getRandomPos(seed);
+			Tile ts = new Tile();
+			ts.type = "spawn";
+			ts.xPos = (int)spawnPos.x;
+			ts.yPos = (int)spawnPos.y;
+			dungeon.Add(ts);
+			for (int i = 1; i < roomsMade.Count; ++i)
+			{
+				Vector2 enPos = ((Room)roomsMade[i]).getRandomPos(seed);
+				Tile en = new Tile();
+				en.type = "enemy";
+				en.xPos = (int)enPos.x;
+				en.yPos = (int)enPos.y;
+				dungeon.Add(en);
+			}
+			return dungeon;
+		}
+	}
+	
+	private bool checkIfDungeonWorks(int roomNum, ArrayList rooms, ArrayList corridors)
+	{
+		((Room)rooms[roomNum]).touched = true;
+		// check if all rooms have been touched
+		int num = 0;
+		for (int i = 0; i < rooms.Count; ++i)
+		{
+			if (((Room)rooms[i]).touched == false)
+				break;
+			if (((Room)rooms[i]).touched == true && i == rooms.Count-1)
+				return true;
+		}
+		// if not, do recursion on rooms connected to this one that aren't touched
+		for (int i = 0; i < corridors.Count; ++i)
+		{
+			Room nextRoom = null;
+			if (((Corridor)corridors[i]).room1 == rooms[roomNum])
+				nextRoom = ((Room)((Corridor)corridors[i]).room2);
+			if (((Corridor)corridors[i]).room2 == rooms[roomNum])
+				nextRoom = ((Room)((Corridor)corridors[i]).room1);
+			if (nextRoom != null && !nextRoom.touched)
+			{
+				for (int c = 0; c < rooms.Count; ++c)
+				{
+					if (rooms[c] == nextRoom)
+					{
+						if (checkIfDungeonWorks(c, rooms, corridors))
+							return true;
+						else
+							break;
+					}
+				}
+			}
+		}
+		return true;
+	}
+}
+
+// internal class
+class Room
 {
 	public int width;
 	public int height;
 	public int xPos;
 	public int yPos;
+	public bool touched;// used to check that all rooms are connected by corridors
 	private ArrayList tiles;
 	
+	// sets config options and (internally) creates the array of tiles needed to make the room
 	public void make(int x, int y, int w, int h)
 	{
 		xPos = x;
@@ -42,6 +183,7 @@ public class Room
 		}
 	}
 	
+	// check the internal array of tiles with the given array of tiles to see if the room can be added.
 	public bool check(ArrayList dungeon)
 	{
 		for (int i = 0; i < tiles.Count; ++i)
@@ -56,6 +198,7 @@ public class Room
 		return true;
 	}
 	
+	// add the room to the array of tiles
 	public void addTo(ref ArrayList dungeon)
 	{
 		for (int i = 0; i < tiles.Count; ++i)
@@ -72,7 +215,7 @@ public class Room
 	}
 }
 
-public class Corridor
+class Corridor
 {
 	public Room room1;
 	public Room room2;
@@ -147,7 +290,7 @@ public class Corridor
 			}
 		}else
 		{
-			//do hooked corridor
+			// TODO: do hooked corridor
 		}
 	}
 	
@@ -176,7 +319,7 @@ public class Corridor
 					}else if (((Tile)dungeon[c]).type == "wall" && ((Tile)tiles[i]).type == "floor")
 					{
 						++totalWallsIntersecting;
-						if (totalWallsIntersecting > width*2)// don't want to intercect more than the width on each side (beginning and end)
+						if (totalWallsIntersecting > width*2)// don't want to intersect more than the width on each side (beginning and end)
 							return false;
 					}
 				}
@@ -200,107 +343,5 @@ public class Corridor
 			}
 			dungeon.Add(tiles[i]);
 		}
-	}
-}
-
-public class DungeonGenerator
-{
-	public float seed;
-	public int width;
-	public int height;
-	public int rooms;
-	private int corridorWidth = 2;
-	
-	void Start ()
-	{
-	
-	}
-	
-	void Update ()
-	{
-	
-	}
-	
-	public void setCorridorWidth(int w)
-	{
-		corridorWidth = w;
-	}
-	
-	public void config(float s, int w, int h, int rs)
-	{
-		seed = s;
-		width = w;
-		height = h;
-		rooms = rs;
-	}
-	
-	public ArrayList generateDungeon()
-	{
-		Random.seed = (int)(seed*100000.0f);
-		ArrayList dungeon = new ArrayList();
-		ArrayList roomsMade = new ArrayList();
-		while (roomsMade.Count < rooms)
-		{
-			Room r = new Room();
-			r.make ((int)Mathf.Floor(Random.value*width), (int)Mathf.Floor(Random.value*height), (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+3, (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+3);
-			if (r.check(dungeon))
-			{
-				roomsMade.Add(r);
-				r.addTo (ref dungeon);
-			}
-		}
-		for (int i = 0; i < roomsMade.Count; ++i)
-		{
-			for (int c = 0; c < roomsMade.Count; ++c)
-			{
-				if (i != c)
-				{
-					Corridor cor = new Corridor();
-					cor.setWidth(corridorWidth);
-					cor.make (((Room)roomsMade[i]), ((Room)roomsMade[c]));
-					if (cor.check(dungeon))
-						cor.addTo (ref dungeon);
-				}
-			}
-		}
-		/*
-		Room r = new Room();
-		r.make (1, 1, 5, 7);
-		r.addTo (ref dungeon);
-		Room r2 = new Room();
-		r2.make (-7, 1, 5, 6);
-		r2.addTo (ref dungeon);
-		Room r3 = new Room();
-		r3.make (-8, 10, 7, 4);
-		r3.addTo (ref dungeon);
-		Corridor c = new Corridor();
-		c.make (r, r2);
-		c.addTo (ref dungeon);
-		Corridor c2 = new Corridor();
-		c2.make (r2, r3);
-		c2.addTo (ref dungeon);
-		Room r4 = new Room();
-		r4.make (-10, -15, 7, 4);
-		r4.addTo (ref dungeon);
-		Corridor c3 = new Corridor();
-		c3.make (r2, r4);
-		c3.addTo (ref dungeon);
-		*/
-		Vector2 spawnPos = ((Room)roomsMade[0]).getRandomPos(seed);
-		Tile ts = new Tile();
-		ts.type = "spawn";
-		ts.xPos = (int)spawnPos.x;
-		ts.yPos = (int)spawnPos.y;
-		dungeon.Add(ts);
-		for (int i = 1; i < roomsMade.Count; ++i)
-		{
-			Vector2 enPos = ((Room)roomsMade[i]).getRandomPos(seed);
-			Tile en = new Tile();
-			en.type = "enemy";
-			en.xPos = (int)enPos.x;
-			en.yPos = (int)enPos.y;
-			dungeon.Add(en);
-		}
-		return dungeon;
 	}
 }
