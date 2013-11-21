@@ -77,85 +77,72 @@ public class Corridor
 	public Room room1;
 	public Room room2;
 	private ArrayList tiles;
+	private int width = 3;
+	private int subWidth = 2;
+	
+	public void setWidth(int w)
+	{
+		width = w;
+		subWidth = width-1;
+	}
 	
 	public void make(Room r1, Room r2)
 	{
 		room1 = r1;
 		room2 = r2;
 		tiles = new ArrayList();
-		// the following code assumes the rooms aren't overlapping
-		if (room1.xPos < room2.xPos+room2.width && room1.xPos + room1.width > room2.xPos)
+		int xStart = 0;
+		int yStart = 0;
+		int length = 0;
+		// the following code assumes the rooms aren't overlapping, which they won't be
+		if (room1.xPos < room2.xPos+room2.width-subWidth && room1.xPos + room1.width-subWidth > room2.xPos)
 		{
-			int xAddMin = room1.xPos < room2.xPos ? room2.xPos : room1.xPos;
-			int xAddMax = room1.xPos+room1.width > room2.xPos+room2.width ? room2.xPos+room2.width : room1.xPos+room1.width;
-			int xAdd = (int)Mathf.Floor(Random.value*(xAddMax-xAddMin))+xAddMin;
+			int xStartMin = room1.xPos < room2.xPos ? room2.xPos : room1.xPos;
+			int xStartMax = room1.xPos+room1.width-subWidth > room2.xPos+room2.width-subWidth ? room2.xPos+room2.width-subWidth : room1.xPos+room1.width-subWidth;
+			xStart = (int)Mathf.Floor(Random.value*(xStartMax-xStartMin))+xStartMin;
 			// do center corridor
 			if (room1.yPos < room2.yPos)
 			{
-				for (int y = room1.yPos+room1.height; y < room2.yPos; y++)
-				{
-					Tile ts = new Tile();
-					ts.type = "floor";
-					ts.xPos = xAdd;
-					ts.yPos = y;
-					tiles.Add(ts);
-					if (y != room1.yPos+room1.height && y != room2.yPos-1)
-					{
-						doWall(ref tiles, xAdd-1, y);
-						doWall(ref tiles, xAdd+1, y);
-					}
-				}
+				yStart = room1.yPos+room1.height;
+				length = room2.yPos;
 			}else
 			{
-				for (int y = room2.yPos+room2.height; y < room1.yPos; y++)
+				yStart = room2.yPos+room2.height;
+				length = room1.yPos;
+			}
+			for (int y = yStart; y < length; ++y)
+			{
+				for (int i = -1; i < width+1; ++i)
 				{
-					Tile ts = new Tile();
-					ts.type = "floor";
-					ts.xPos = xAdd;
-					ts.yPos = y;
-					tiles.Add(ts);
-					if (y != room2.yPos+room2.height && y != room1.yPos-1)
-					{
-						doWall(ref tiles, xAdd-1, y);
-						doWall(ref tiles, xAdd+1, y);
-					}
+					if (i == -1 || i == width)
+						doTile(ref tiles, xStart+i, y, "wall");
+					else
+						doTile(ref tiles, xStart+i, y, "floor");
 				}
 			}
 		}else
-		if (room1.yPos < room2.yPos+room2.height && room1.yPos + room1.height > room2.yPos)
+		if (room1.yPos < room2.yPos+room2.height-subWidth && room1.yPos + room1.height-subWidth > room2.yPos)
 		{
-			int yAddMin = room1.yPos < room2.yPos ? room2.yPos : room1.yPos;
-			int yAddMax = room1.yPos+room1.height > room2.yPos+room2.height ? room2.yPos+room2.height : room1.yPos+room1.height;
-			int yAdd = (int)Mathf.Floor(Random.value*(yAddMax-yAddMin))+yAddMin;
+			int yStartMin = room1.yPos < room2.yPos ? room2.yPos : room1.yPos;
+			int yStartMax = room1.yPos+room1.height-subWidth > room2.yPos+room2.height-subWidth ? room2.yPos+room2.height-subWidth : room1.yPos+room1.height-subWidth;
+			yStart = (int)Mathf.Floor(Random.value*(yStartMax-yStartMin))+yStartMin;
 			if (room1.xPos < room2.xPos)
 			{
-				for (int x = room1.xPos+room1.width; x < room2.xPos; x++)
-				{
-					Tile ts = new Tile();
-					ts.type = "floor";
-					ts.xPos = x;
-					ts.yPos = yAdd;
-					tiles.Add(ts);
-					if (x != room1.xPos+room1.width && x != room2.xPos-1)
-					{
-						doWall(ref tiles, x, yAdd-1);
-						doWall(ref tiles, x, yAdd+1);
-					}
-				}
+				xStart = room1.xPos+room1.width;
+				length = room2.xPos;
 			}else
 			{
-				for (int x = room2.xPos+room2.width; x < room1.xPos; x++)
+				xStart = room2.xPos+room2.width;
+				length = room1.xPos;
+			}
+			for (int x = xStart; x < length; ++x)
+			{
+				for (int i = -1; i < width+1; ++i)
 				{
-					Tile ts = new Tile();
-					ts.type = "floor";
-					ts.xPos = x;
-					ts.yPos = yAdd;
-					tiles.Add(ts);
-					if (x != room2.xPos+room2.width && x != room1.xPos-1)
-					{
-						doWall(ref tiles, x, yAdd-1);
-						doWall(ref tiles, x, yAdd+1);
-					}
+					if (i == -1 || i == width)
+						doTile(ref tiles, x, yStart+i, "wall");
+					else
+						doTile(ref tiles, x, yStart+i, "floor");
 				}
 			}
 		}else
@@ -164,10 +151,10 @@ public class Corridor
 		}
 	}
 	
-	private void doWall(ref ArrayList tiles, int x, int y)
+	private void doTile(ref ArrayList tiles, int x, int y, string type)
 	{
 		Tile ts = new Tile();
-		ts.type = "wall";
+		ts.type = type;
 		ts.xPos = x;
 		ts.yPos = y;
 		tiles.Add(ts);
@@ -186,10 +173,10 @@ public class Corridor
 					if (((Tile)dungeon[c]).type == "floor")
 					{
 						return false;
-					}else if (((Tile)dungeon[c]).type == "wall")
+					}else if (((Tile)dungeon[c]).type == "wall" && ((Tile)tiles[i]).type == "floor")
 					{
 						++totalWallsIntersecting;
-						if (totalWallsIntersecting > 2)// don't want to intercect more than two walls (beginning and end)
+						if (totalWallsIntersecting > width*2)// don't want to intercect more than the width on each side (beginning and end)
 							return false;
 					}
 				}
@@ -222,6 +209,7 @@ public class DungeonGenerator
 	public int width;
 	public int height;
 	public int rooms;
+	private int corridorWidth = 2;
 	
 	void Start ()
 	{
@@ -231,6 +219,11 @@ public class DungeonGenerator
 	void Update ()
 	{
 	
+	}
+	
+	public void setCorridorWidth(int w)
+	{
+		corridorWidth = w;
 	}
 	
 	public void config(float s, int w, int h, int rs)
@@ -249,7 +242,7 @@ public class DungeonGenerator
 		while (roomsMade.Count < rooms)
 		{
 			Room r = new Room();
-			r.make ((int)Mathf.Floor(Random.value*width), (int)Mathf.Floor(Random.value*height), (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+2, (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+2);
+			r.make ((int)Mathf.Floor(Random.value*width), (int)Mathf.Floor(Random.value*height), (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+3, (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+3);
 			if (r.check(dungeon))
 			{
 				roomsMade.Add(r);
@@ -263,6 +256,7 @@ public class DungeonGenerator
 				if (i != c)
 				{
 					Corridor cor = new Corridor();
+					cor.setWidth(corridorWidth);
 					cor.make (((Room)roomsMade[i]), ((Room)roomsMade[c]));
 					if (cor.check(dungeon))
 						cor.addTo (ref dungeon);
