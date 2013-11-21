@@ -1053,7 +1053,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 100000, guid: 26fd6dc505c263a44af0f9c7297e767e, type: 2}
   floorPrefab: {fileID: 100000, guid: f58086ae4e63ccf4db57b15def890bce, type: 2}
   enemyPrefab: {fileID: 100000, guid: 6086efdd0bb5d964298364a969b802aa, type: 2}
-  wallPrefab: {fileID: 100000, guid: ad49f9773f1f9274a98a2b4f15b4ba6d, type: 2}
+  wallPrefab: {fileID: 100000, guid: d970d0e06e6734243a5fc8015916bbcb, type: 2}
 --- !u!4 &1744328158
 Transform:
   m_ObjectHideFlags: 0
