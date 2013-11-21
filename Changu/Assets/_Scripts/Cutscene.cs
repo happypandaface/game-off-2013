@@ -61,6 +61,7 @@ public class Cutscene : MonoBehaviour
 		text.text = "Once upon a time ...";
 
 		OpeningCutscene ();
+		//EncoreCutscene();
 		//state = CutsceneState.START;
 		//state = "Fade In";
 	}
@@ -238,5 +239,82 @@ public class Cutscene : MonoBehaviour
 		scenes.Add ( new CutsceneData(3.0f, "But they still search for his treasure...", 0) );
 		//start it!
 		StartCutscene();
+	}
+
+	public void PandorasBoxCutscene()
+	{
+		//starts the first boss fight cutscene
+		//set up data
+		scenes.Add ( new CutsceneData(4.0f, "Was this the fabled treasure of the hero of old?", 0) );
+		scenes.Add ( new CutsceneData(0.5f, "...", 0) );
+		scenes.Add ( new CutsceneData(0.5f, "No.", 0) );
+		scenes.Add ( new CutsceneData(0.0f, "", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "This was the ancient evil!", 0) );
+		//start it!
+		StartCutscene();
+	}
+
+	public void EncoreCutscene()
+	{
+		//starts the encore transition cutscene
+		//set up data
+		string hero = "hero"; //heroine
+		string his = "his"; //her
+
+		scenes.Add ( new CutsceneData(2.5f, "The " + hero + " vanquished the evil", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "...Or so they thought.", 0) );
+		scenes.Add ( new CutsceneData(1.0f, "Years passed.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "And the evil stirred once again.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "But some " + hero + "s are the stuff of legends.", 0) );
+
+		scenes.Add ( new CutsceneData(0.0f, "Some", 0) );
+		scenes.Add ( new CutsceneData(0.0f, "Some " + hero + "s", 0) );
+		scenes.Add ( new CutsceneData(0.0f, "Some " + hero + "s never", 0) );
+		scenes.Add ( new CutsceneData(1.0f, "Some " + hero + "s never die.", 0) );
+		//start it!
+		StartCutscene();
+	}
+
+	public void DeathCutscene()
+	{
+		//starts the death transition cutscene
+		//set up data
+		string hero = "hero"; //heroine
+		string his = "his"; //her
+		string children = "children";  //disciples
+
+		scenes.Add ( new CutsceneData(2.0f, "The " + hero + " fell in battle.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, his + " " + children + " mourned thier loss.", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "And vowed revenge.", 0) );
+		//start it!
+		StartCutscene();
+	}
+
+	public void VictoryCutscene()
+	{
+		//starts the victory transition cutscene
+		//set up data
+		string hero = "hero"; //heroine
+		string his = "his"; //her
+		string child = "descendant"; //disciple
+		
+		scenes.Add ( new CutsceneData(2.5f, "The " + hero + " vanquished the evil", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "...Or so they thought.", 0) );
+		scenes.Add ( new CutsceneData(1.0f, "Years passed.", 0) );
+		scenes.Add ( new CutsceneData(1.5f, "The " + hero + " died.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "And the evil stirred once again.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "But there will always be a hero.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, his + " brave " + child + " took up " + his + " mantle,", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "And set out to beat it again.", 0) );
+		//start it!
+		StartCutscene();
+	}
+
+	public void FinalDeathCutscene()
+	{
+	}
+
+	public void FinalVictoryCutscene()
+	{
 	}
 }
