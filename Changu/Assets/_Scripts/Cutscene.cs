@@ -38,7 +38,7 @@ public class Cutscene : MonoBehaviour
 	float t_goal = 1.0f;
 
 	public Texture2D bg_blank; //bg texture
-	public Texture2D[] fgs = new Texture2D[10]; //assign in editor
+	public Texture2D[] fgs = new Texture2D[20]; //assign in editor
 
 	//Objects to take on values
 	public GameObject foreground_obj; //assign in editor
@@ -71,6 +71,9 @@ public class Cutscene : MonoBehaviour
 
 		OpeningCutscene ();
 		//EncoreCutscene();
+		//PandorasBoxCutscene ();
+		//DeathCutscene ();
+		//VictoryCutscene ();
 		//state = CutsceneState.START;
 		//state = "Fade In";
 	}
@@ -243,21 +246,21 @@ public class Cutscene : MonoBehaviour
 		scenes.Add ( new CutsceneData(1.0f, "In the end,", 4) );
 		scenes.Add ( new CutsceneData(1.0f, "one prevailed.", 5) );
 		scenes.Add ( new CutsceneData(2.5f, "He sealed the evil away...", 6) );
-		scenes.Add ( new CutsceneData(2.5f, "And hid it from the eyes of men.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "And hid it from the eyes of men.", 10) );
 		scenes.Add ( new CutsceneData(0.0f, "", 0) );
 
-		scenes.Add ( new CutsceneData(3.0f, "For his valor, the hero was given riches.", 0) );
-		scenes.Add ( new CutsceneData(2.0f, "But when he died...", 0) );
+		scenes.Add ( new CutsceneData(3.0f, "For his valor, the hero was given riches.", 7) );
+		scenes.Add ( new CutsceneData(2.0f, "But when he died...", 8) );
 		scenes.Add ( new CutsceneData(2.0f, "His children became greedy.", 0) );
-		scenes.Add ( new CutsceneData(1.5f, "They fought over it.", 0) );
-		scenes.Add ( new CutsceneData(2.0f, "After much bloodshed,", 0) );
-		scenes.Add ( new CutsceneData(2.5f, "They decided to hide the treasure,", 0) );
+		scenes.Add ( new CutsceneData(1.5f, "They fought over it.", 9) );
+		scenes.Add ( new CutsceneData(2.0f, "After much bloodshed,", 3) );
+		scenes.Add ( new CutsceneData(2.5f, "They decided to hide the treasure,", 10) );
 		scenes.Add ( new CutsceneData(2.0f, "so no one would fight over it.", 0) );
 		scenes.Add ( new CutsceneData(0.0f, "", 0) );
 
 		scenes.Add ( new CutsceneData(1.0f, "Many years passed.", 0) );
-		scenes.Add ( new CutsceneData(2.5f, "People forgot the hero, and the evil.", 0) );
-		scenes.Add ( new CutsceneData(3.0f, "But they still search for his treasure...", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "People forgot the hero, and the evil.", 4) );
+		scenes.Add ( new CutsceneData(3.0f, "But they still search for his treasure...", 10) );
 		//start it!
 		StartCutscene();
 	}
@@ -266,11 +269,11 @@ public class Cutscene : MonoBehaviour
 	{
 		//starts the first boss fight cutscene
 		//set up data
-		scenes.Add ( new CutsceneData(4.0f, "Was this the fabled treasure of the hero of old?", 0) );
-		scenes.Add ( new CutsceneData(0.5f, "...", 0) );
-		scenes.Add ( new CutsceneData(0.5f, "No.", 0) );
-		scenes.Add ( new CutsceneData(0.0f, "", 0) );
-		scenes.Add ( new CutsceneData(2.0f, "This was the ancient evil!", 0) );
+		scenes.Add ( new CutsceneData(4.0f, "Was this the treasure of the hero of old?", 10) );
+		scenes.Add ( new CutsceneData(0.5f, "...", 7) );
+		scenes.Add ( new CutsceneData(0.5f, "No.", 10) );
+		scenes.Add ( new CutsceneData(0.0f, "", 10) );
+		scenes.Add ( new CutsceneData(2.0f, "This was the ancient evil!", 6) );
 		//start it!
 		StartCutscene();
 	}
@@ -282,16 +285,13 @@ public class Cutscene : MonoBehaviour
 		string hero = "hero"; //heroine
 		string his = "his"; //her
 
-		scenes.Add ( new CutsceneData(2.5f, "The " + hero + " vanquished the evil", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "The " + hero + " vanquished the evil", 5) );
 		scenes.Add ( new CutsceneData(2.0f, "...Or so they thought.", 0) );
 		scenes.Add ( new CutsceneData(1.0f, "Years passed.", 0) );
 		scenes.Add ( new CutsceneData(2.5f, "And the evil stirred once again.", 0) );
 		scenes.Add ( new CutsceneData(2.5f, "But some " + hero + "s are the stuff of legends.", 0) );
 
-		scenes.Add ( new CutsceneData(0.0f, "Some", 0) );
-		scenes.Add ( new CutsceneData(0.0f, "Some " + hero + "s", 0) );
-		scenes.Add ( new CutsceneData(0.0f, "Some " + hero + "s never", 0) );
-		scenes.Add ( new CutsceneData(1.0f, "Some " + hero + "s never die.", 0) );
+		scenes.Add ( new CutsceneData(1.0f, "Some " + hero + "s never die.", 4) );
 		//start it!
 		StartCutscene();
 	}
@@ -304,9 +304,9 @@ public class Cutscene : MonoBehaviour
 		string his = "his"; //her
 		string children = "children";  //disciples
 
-		scenes.Add ( new CutsceneData(2.0f, "The " + hero + " fell in battle.", 0) );
-		scenes.Add ( new CutsceneData(2.5f, his + " " + children + " mourned thier loss.", 0) );
-		scenes.Add ( new CutsceneData(2.0f, "And vowed revenge.", 0) );
+		scenes.Add ( new CutsceneData(2.0f, "The " + hero + " fell in battle.", 11) );
+		scenes.Add ( new CutsceneData(2.5f, his + " " + children + " mourned thier loss.", 8) );
+		scenes.Add ( new CutsceneData(2.0f, "And vowed revenge.", 4) );
 		//start it!
 		StartCutscene();
 	}
@@ -319,14 +319,14 @@ public class Cutscene : MonoBehaviour
 		string his = "his"; //her
 		string child = "descendant"; //disciple
 		
-		scenes.Add ( new CutsceneData(2.5f, "The " + hero + " vanquished the evil", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "The " + hero + " vanquished the evil", 5) );
 		scenes.Add ( new CutsceneData(2.0f, "...Or so they thought.", 0) );
 		scenes.Add ( new CutsceneData(1.0f, "Years passed.", 0) );
-		scenes.Add ( new CutsceneData(1.5f, "The " + hero + " died.", 0) );
+		scenes.Add ( new CutsceneData(1.5f, "The " + hero + " died.", 8) );
 		scenes.Add ( new CutsceneData(2.5f, "And the evil stirred once again.", 0) );
 		scenes.Add ( new CutsceneData(2.5f, "But there will always be a hero.", 0) );
 		scenes.Add ( new CutsceneData(2.5f, his + " brave " + child + " took up " + his + " mantle,", 0) );
-		scenes.Add ( new CutsceneData(2.5f, "And set out to beat it again.", 0) );
+		scenes.Add ( new CutsceneData(2.5f, "And set out to beat it again.", 4) );
 		//start it!
 		StartCutscene();
 	}
