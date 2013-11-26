@@ -18,6 +18,19 @@ public class DungeonGenerator
 	public int height;
 	public int rooms;
 	private int corridorWidth = 2;
+	private int minWidth = 4;
+	private int maxWidth = 10;
+	private int minHeight = 4;
+	private int maxHeight = 10;
+	
+	// setup the max and min width and min and max height for rooms
+	public void configRoomSize(int minW, int maxW, int minH, int maxH)
+	{
+		minWidth = minW;
+		maxWidth = maxW;
+		minHeight = minH;
+		maxHeight = maxH;
+	}
 	
 	// set up the seed, width, height and # of rooms
 	public void config(float s, int w, int h, int rs)
@@ -58,7 +71,7 @@ public class DungeonGenerator
 			while (roomsMade.Count < rooms)
 			{
 				Room r = new Room();
-				r.make ((int)Mathf.Floor(Random.value*width), (int)Mathf.Floor(Random.value*height), (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+3, (int)Mathf.Floor(Random.value*height*width/rooms/rooms)+3);
+				r.make ((int)Mathf.Floor(Random.value*width), (int)Mathf.Floor(Random.value*height), (int)Mathf.Floor(Random.value*(maxWidth-minWidth))+minWidth, (int)Mathf.Floor(Random.value*(maxHeight-minHeight))+minHeight);
 				if (r.check(dungeon))
 				{
 					roomsMade.Add(r);
