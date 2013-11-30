@@ -13,6 +13,13 @@ public class CustomController : MonoBehaviour
 	public float speed = 2.0f; //unity units per second (we're using Tile Size pixels per unit (64) )
 
 	BoxCollider2D my_collider;
+
+	public GameObject eye_obj;
+	public Sprite[] eye_sprites = new Sprite[4]; 
+
+	public GameObject hair_obj;
+	public Sprite[] hair_sprites = new Sprite[4];
+
 	#endregion
 
 	// Use this for initialization
@@ -125,6 +132,12 @@ public class CustomController : MonoBehaviour
 			#endregion
 
 		}
+
+		#region animate
+		//hair and eyes
+		hair_obj.GetComponent<SpriteRenderer>().sprite = hair_sprites[ facing ];
+		//eye_obj.GetComponent<SpriteRenderer>().sprite = eye_sprites[ facing ];
+		#endregion
 	}
 
 	public void Move( Vector3 move_vec )
