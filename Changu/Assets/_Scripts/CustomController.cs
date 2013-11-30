@@ -89,6 +89,14 @@ public class CustomController : MonoBehaviour
 
 		if ( move_vec.sqrMagnitude > 0.0f ) //sqrMagnitude is more efficient.
 		{
+			#region animate
+			//Animate
+			if ( facing == 0 ){ this.gameObject.GetComponent<Animator>().Play( "WalkRight" ); }
+			else if ( facing == 1 ){ this.gameObject.GetComponent<Animator>().Play( "WalkUp" ); }
+			else if ( facing == 2 ){ this.gameObject.GetComponent<Animator>().Play( "WalkLeft" ); }
+			else if ( facing == 3 ){ this.gameObject.GetComponent<Animator>().Play( "WalkDown" ); }
+			#endregion
+
 			//Move.
 			//Get direction from vec.
 
@@ -107,6 +115,15 @@ public class CustomController : MonoBehaviour
 		else
 		{
 			//Idle
+			#region animate
+			//this.gameObject.GetComponent<Animator>().Play("Idle");
+			//Animate
+			if ( facing == 0 ){ this.gameObject.GetComponent<Animator>().Play( "IdleRight" ); }
+			else if ( facing == 1 ){ this.gameObject.GetComponent<Animator>().Play( "IdleUp" ); }
+			else if ( facing == 2 ){ this.gameObject.GetComponent<Animator>().Play( "IdleLeft" ); }
+			else if ( facing == 3 ){ this.gameObject.GetComponent<Animator>().Play( "IdleDown" ); }
+			#endregion
+
 		}
 	}
 

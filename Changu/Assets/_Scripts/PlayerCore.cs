@@ -37,6 +37,12 @@ public class PlayerCore : MonoBehaviour
 	public Relic relic = Relic.BOOTS; //ENUM: shield, boots, berserk
 	public Gender gender = Gender.MALE; //ENUM: 0: female, 1: male
 
+	//Male and Female controllers
+	public RuntimeAnimatorController M_controller;
+	public RuntimeAnimatorController F_controller;
+	public Sprite M_sprite;
+	public Sprite F_sprite;
+
 	//hair color / style
 	//eye color / style
 	//skin tone
@@ -83,7 +89,7 @@ public class PlayerCore : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-	
+
 	}
 	
 	// Update is called once per frame
@@ -401,5 +407,20 @@ public class PlayerCore : MonoBehaviour
 		berserk_def_multiplier = 0.25f * (g / max_g) + 0.5f; //increase defense bonus
 		berserk_sta_cost = 0.0f * (g / max_g) + 0.0f; //reduce stamina cost?
 		berserk_cooldown_total = -1.0f * (g / max_g) + 10.0f; //reduce CD?
+	}
+
+	public void SetGender( Gender gender )
+	{
+		//Set animation
+		if ( gender == Gender.FEMALE )
+		{
+			this.gameObject.GetComponent<Animator>().runtimeAnimatorController = F_controller;
+			this.gameObject.GetComponent<SpriteRenderer>().sprite = F_sprite;
+		}
+		else
+		{
+			this.gameObject.GetComponent<Animator>().runtimeAnimatorController = M_controller;
+			this.gameObject.GetComponent<SpriteRenderer>().sprite = M_sprite;
+		}
 	}
 }

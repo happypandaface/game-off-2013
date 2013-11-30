@@ -11,6 +11,11 @@ public class ExampleDungeonUser : MonoBehaviour
 	public GameObject floorPrefab;
 	public GameObject enemyPrefab;
 	public GameObject wallPrefab;
+	public GameObject wallPrefabMedieval;
+	public GameObject wallPrefabMedievalCracked;
+	public GameObject wallPrefabMedievalVines;
+	public GameObject wallPrefabSteampunk;
+	public GameObject wallPrefabFuture;
 
 	private int tileSize = 1;
 	//private float speed = 100;
@@ -43,7 +48,27 @@ public class ExampleDungeonUser : MonoBehaviour
 			}
 			else if (ts.type == "wall")
 			{
-				GameObject tile = (GameObject)Instantiate(wallPrefab, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				GameObject tile;
+
+				//Gen check.
+				if ( true )
+				{
+					//subtypes: wall, crack, vine
+					tile = (GameObject)Instantiate(wallPrefabMedieval, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				}
+				else if ( true )
+				{
+					tile = (GameObject)Instantiate(wallPrefabSteampunk, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				}
+				else if ( true )
+				{
+					tile = (GameObject)Instantiate(wallPrefabFuture, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				}
+				else
+				{
+					tile = (GameObject)Instantiate(wallPrefab, new Vector3(ts.xPos*tileSize, ts.yPos*tileSize, 0.0f), Quaternion.identity );
+				}
+				//Move it.
 				tile.transform.parent = dungeon.transform;
 			}
 		}

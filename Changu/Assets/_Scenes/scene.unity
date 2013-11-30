@@ -811,7 +811,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 12800000, guid: b441676c11bea7041bb56b736a622f38, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 64
+  m_FontSize: 40
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -870,6 +870,7 @@ GameObject:
   - 61: {fileID: 1410966872}
   - 114: {fileID: 1410966869}
   - 114: {fileID: 1410966873}
+  - 95: {fileID: 1410966874}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -912,7 +913,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_SortingLayerID: 2511236001
-  m_Sprite: {fileID: 21300000, guid: ef547d47921383040b8de00dbe12e9b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7efb3c85edfa5b24487f8e331147d51d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1410966871
 Transform:
@@ -957,6 +958,24 @@ MonoBehaviour:
   character_class: 0
   relic: 1
   gender: 1
+  M_controller: {fileID: 9100000, guid: 4c6b81271e6ad3546bf71e523bfde63c, type: 2}
+  F_controller: {fileID: 9100000, guid: 233eeb5bf61cd394aa44711cd3bcdba4, type: 2}
+  M_sprite: {fileID: 21300000, guid: 7efb3c85edfa5b24487f8e331147d51d, type: 3}
+  F_sprite: {fileID: 21300000, guid: 3dd07184a09fcc144b5508181182a36f, type: 3}
+--- !u!95 &1410966874
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1410966868}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4c6b81271e6ad3546bf71e523bfde63c, type: 2}
+  m_CullingMode: 1
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!1 &1514530144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1142,13 @@ MonoBehaviour:
   floorPrefab: {fileID: 100000, guid: f58086ae4e63ccf4db57b15def890bce, type: 2}
   enemyPrefab: {fileID: 100000, guid: 6086efdd0bb5d964298364a969b802aa, type: 2}
   wallPrefab: {fileID: 100000, guid: d970d0e06e6734243a5fc8015916bbcb, type: 2}
+  wallPrefabMedieval: {fileID: 100002, guid: 53c56e783c64e9141a33cb9211c34841, type: 2}
+  wallPrefabMedievalCracked: {fileID: 100000, guid: 8470065de45443f439279adbcc95b7a3,
+    type: 2}
+  wallPrefabMedievalVines: {fileID: 100002, guid: e9e6958e5f08a2d439a780bb69013114,
+    type: 2}
+  wallPrefabSteampunk: {fileID: 100002, guid: 514b1bf24add5294982e1900ca6ee0f9, type: 2}
+  wallPrefabFuture: {fileID: 100000, guid: 8c669dbdbf682cb4983341b381f403e9, type: 2}
 --- !u!4 &1744328158
 Transform:
   m_ObjectHideFlags: 0

@@ -132,11 +132,13 @@ public class GenerationalData : MonoBehaviour
 		int rn = Random.Range(0, 1);
 		if ( rn == 0 )
 		{
-			player.gender = Gender.MALE;
+			//player.gender = Gender.MALE;
+			player.SetGender( Gender.MALE );
 		}
 		else
 		{
-			player.gender = Gender.FEMALE;
+			//player.gender = Gender.FEMALE;
+			player.SetGender( Gender.FEMALE );
 		}
 	}
 

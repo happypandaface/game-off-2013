@@ -157,13 +157,13 @@ public class CharacterInitializationGUI : MonoBehaviour
 			if ( GUI.Button ( m_gender_male, "Male" ) )
 			{
 				//set player gender to male
-				player_core.gender = Gender.MALE;
+				player_core.SetGender( Gender.MALE );
 				state = 2;
 			}
 			if ( GUI.Button ( m_gender_female, "Female" ) )
 			{
 				//set player gender to female
-				player_core.gender = Gender.FEMALE;
+				player_core.SetGender( Gender.FEMALE );
 				state = 2;
 			}
 		}
